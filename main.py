@@ -1,46 +1,53 @@
 import math
 
-def square(parameter):
-    try:
-        a = int(parameter[-1])
-        return(f'Square Perimeter {4*a} Area {a**4}')
-    except:
-        raise TypeError
+class Square():
+    def __init__(self, side):
+        self.side = side
 
-def rectangle(parameter):
-    try:
-        xTopRight = int(parameter[1])
-        yTopRight = int(parameter[2])
-        xBottomLeft = int(parameter[-1])
-        yBottomLeft = int(parameter[-2])
+    def calculate_area(self):
+        return self.side**2
+    
+    def calculate_perimeter(self):
+        return 4*self.side
 
-        width = xTopRight - xBottomLeft
-        height = yTopRight - yBottomLeft
+class Rectangle():
+    def __init__(self, x1, y1, x2, y2):
+        self.width = x1 - x2
+        self.height = y1 - y2
 
-        return (f"Rectangle Perimeter {2 * (width + height)} Area {width * height}")
-    except:
-        raise TypeError
+    def calculate_area(self):
+        return self.width * self.height
+    
+    def calculate_perimeter(self):
+        return 2 * (self.width + self.height)
+        
 
-def circle(parameter):
-    try:
-        pi = math.pi
-        radius = int(parameter[-1])
-        return (f"Circle Perimeter {int(2 * pi * radius)} Area {int((radius**2) * pi)}")
-    except:
-        raise TypeError
+class Circle():
+    def __init__(self, radius):
+        self.radius = radius
+        self.pi = math.pi
+
+    def calculate_area(self):
+        return int((self.radius**2) * self.pi)
+    
+    def calculate_perimeter(self):
+        return int(2 * self.pi * self.radius)
 
 
 def match_shape(a):
     match a.split(" "):
-        case ['Square', *files]:
-            square(files)
-        case ['Rectangle', *files]:
-            rectangle(files)
-        case ['Circle', *files]:
-            circle(files)
+        case ['Square', *a]:
+            square = Square(int(a[-1]))
+            return f'Square Perimeter {square.calculate_perimeter()} Area {square.calculate_area()}'
+        case ['Rectangle', *a]:
+            rectangle = Rectangle(int(a[1]), int(a[2], int(a[-1], int(a[-2]))))
+            return f"Rectangle Perimeter {rectangle.calculate_perimeter()} Area {rectangle.calculate_areat()}"
+        case ['Circle', *a]:
+            circle = Circle(int(a[-1]))
+            return f"Circle Perimeter {circle.calculate_perimeter()} Area {circle.calculate_area()}"
         case _:
             print("You have entered a shape that is not supported by the program code")
 
 if __name__ == "__main__":
     a = input("Enter data about geometric shapes using the example. Shape type Description of parameters: for example, for a square it can be TopRight, Side, for a rectangle - TopRight, BottomLeft, and for a circle - Center and Radius: \n")
-    match_shape(a)
+    print(match_shape(a))
