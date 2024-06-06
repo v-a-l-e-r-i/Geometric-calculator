@@ -2,14 +2,11 @@ import unittest
 from main import *
 
 class ShapeCalculateTest(unittest.TestCase):
-    def test_square(self):
-        self.assertEqual(match_shape("Square TopRight 1 1 Side 1"), "Square Perimeter 4 Area 1")
+    
+    def test_shapes(self):
+        outpu_list = ['Square Perimeter 4 Area 1', 'Rectangle Perimeter 4 Area 1', 'Circle Perimeter 12 Area 12']
 
-    def test_rectangle(self):
-        self.assertEqual(match_shape("Rectangle TopRight 2 2 BottomLeft 1 1"), "Rectangle Perimeter 4 Area 1")
-
-    def test_circle(self):
-        self.assertEqual(match_shape("Circle Center 1 1 Radius 2"), "Circle Perimeter 1 Area 2")
+        self.assertEqual(generate_output("Square TopRight 1 1 Side 1\nRectangle TopRight 2 2 BottomLeft 1 1\nCircle Center 1 1 Radius 2"), outpu_list)
 
 if __name__ == "__main__":
     unittest.main()
